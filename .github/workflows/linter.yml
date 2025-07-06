@@ -1,0 +1,12 @@
+name: Ruff Linter
+on: workflow_call
+jobs:
+  lint-ruff:
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Display active directory
+      run: pwd
+    - name: Activate linter
+      run: ruff check
+
+
