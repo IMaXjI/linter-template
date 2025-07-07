@@ -2,11 +2,17 @@ name: Ruff Linter
 on: workflow_call
 jobs:
   lint-ruff:
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Display active directory
-      run: pwd
-    - name: Activate linter
-      run: ruff check
+    name: Linter
+    runs-on: ubuntu-22.04
+    container: python:3.9-slim
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Display content
+        run: pwd && ls -l
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Activate linter
+        run: ruff check
 
 
