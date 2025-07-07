@@ -5,15 +5,12 @@
 Для интеграции шаблона в целевой проект необходимо:
 
 ```yaml
-# Добавление шаблона 
-include:
-  - project: 'skillbox-michlew/linter-template'
-    file: 'linter.yml'
-# Первая стадия с линтером
-stages:
-- linter
-...
-# Активация шаблона
-linter:
-  extends: .lint-ruff
+# Создать job с вызовом reusable workflow из целевого проекта  
+jobs:
+  linter:
+    uses: IMaXjI/linter-template/.github/workflows/linter.yml@main
+  # Добавить зависимость от линтера на последующие стадии
+  next_job:
+    ...
+    needs: linter
 ```
